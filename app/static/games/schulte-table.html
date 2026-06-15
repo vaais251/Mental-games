@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schulte Table — Mental Games</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>" />
+  <style>
+    .st-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+      width: 100%; max-width: 440px;
+    }
+    .st-cell {
+      aspect-ratio: 1; display: grid; place-items: center;
+      border-radius: 12px; cursor: pointer; user-select: none;
+      background: var(--surface-2); border: 1px solid var(--border);
+      font-size: clamp(18px, 4.5vw, 26px); font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.06s, background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .st-cell:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .st-cell.done {
+      background: rgba(52, 211, 153, 0.12); color: var(--good);
+      border-color: rgba(52, 211, 153, 0.4); cursor: default;
+    }
+    .st-cell.done:hover { transform: none; }
+    .st-cell.wrong {
+      background: linear-gradient(135deg, var(--bad), #ef4444); color: #fff; border-color: var(--bad);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" id="topbar"></header>
+
+    <div class="game-head">
+      <div>
+        <h1>🔢 Schulte Table</h1>
+        <p>Keep your eyes on the centre and find the numbers 1–25 in order, as fast as you can.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="label">Find next</div><div class="value" id="next">1</div></div>
+      <div class="stat-pill"><div class="label">Time</div><div class="value" id="time">0.00s</div></div>
+      <div class="stat-pill"><div class="label">Mistakes</div><div class="value" id="miss">0</div></div>
+      <div class="stat-pill"><div class="label">Best time</div><div class="value good" id="best">—</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="restart">↻ Shuffle</button>
+      <span class="hint" id="status">Tap “1” to start the clock.</span>
+    </div>
+
+    <div class="board"><div class="st-grid" id="grid"></div></div>
+
+    <section class="leaderboard">
+      <h2>🏆 Leaderboard — fastest tables</h2>
+      <div class="lb-list" id="lb"></div>
+    </section>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="big">⏱️</div>
+      <h2>Table complete!</h2>
+      <div class="result" id="result">0.00s</div>
+      <p id="sub">0 mistakes</p>
+      <div class="badge-new" id="badge" style="display:none">⭐ New personal best!</div>
+      <div><button class="btn" id="again">Play again</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/schulte-table.js"></script>
+</body>
+</html>

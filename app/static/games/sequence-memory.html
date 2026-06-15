@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sequence Memory — Mental Games</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <style>
+    .sm-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      width: 100%; max-width: 360px;
+    }
+    .sm-tile {
+      aspect-ratio: 1; border-radius: 16px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      cursor: pointer; transition: transform 0.08s, box-shadow 0.12s, background 0.12s;
+    }
+    .sm-tile.idle { cursor: default; }
+    .sm-tile:not(.idle):hover { border-color: var(--primary); }
+    .sm-tile.lit {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 0 28px rgba(124, 92, 255, 0.8); transform: scale(1.04);
+    }
+    .sm-tile.good {
+      background: linear-gradient(135deg, var(--good), #10b981);
+      box-shadow: 0 0 26px rgba(52, 211, 153, 0.7);
+    }
+    .sm-tile.bad {
+      background: linear-gradient(135deg, var(--bad), #ef4444);
+      box-shadow: 0 0 26px rgba(248, 113, 113, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" id="topbar"></header>
+
+    <div class="game-head">
+      <div>
+        <h1>🧠 Sequence Memory</h1>
+        <p>Watch the tiles light up, then repeat the pattern. It grows by one every round.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="label">Level</div><div class="value" id="level">0</div></div>
+      <div class="stat-pill"><div class="label">Status</div><div class="value" id="phase" style="font-size:18px">Ready</div></div>
+      <div class="stat-pill"><div class="label">Best level</div><div class="value good" id="best">—</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="start">▶ Start</button>
+      <span class="hint" id="status">Press Start, then watch carefully.</span>
+    </div>
+
+    <div class="board"><div class="sm-grid" id="grid"></div></div>
+
+    <section class="leaderboard">
+      <h2>🏆 Leaderboard — highest levels</h2>
+      <div class="lb-list" id="lb"></div>
+    </section>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="big">🧠</div>
+      <h2>Game over</h2>
+      <div class="result" id="result">Level 0</div>
+      <p id="sub">You remembered the pattern this far.</p>
+      <div class="badge-new" id="badge" style="display:none">⭐ New personal best!</div>
+      <div><button class="btn" id="again">Try again</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/sequence-memory.js"></script>
+</body>
+</html>

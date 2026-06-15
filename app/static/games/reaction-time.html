@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reaction Time — Mental Games</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    .rt-zone {
+      width: 100%; min-height: 340px; border-radius: var(--radius);
+      display: grid; place-items: center; text-align: center;
+      cursor: pointer; user-select: none; padding: 30px;
+      transition: background 0.12s ease;
+    }
+    .rt-zone .big-emoji { font-size: 56px; line-height: 1; margin-bottom: 14px; }
+    .rt-zone .head { font-size: clamp(24px, 4vw, 34px); font-weight: 800; margin-bottom: 6px; }
+    .rt-zone .small { font-size: 16px; opacity: 0.85; }
+    .rt-zone.idle   { background: linear-gradient(160deg, var(--surface-2), var(--bg-2)); color: var(--text); }
+    .rt-zone.wait   { background: linear-gradient(160deg, #b91c1c, #ef4444); color: #fff; }
+    .rt-zone.go     { background: linear-gradient(160deg, #059669, #34d399); color: #042f1f; }
+    .rt-zone.result { background: linear-gradient(160deg, var(--surface-2), var(--bg-2)); color: var(--text); }
+    .rt-zone.toosoon{ background: linear-gradient(160deg, #7c2d12, #f97316); color: #fff; }
+    .rt-zone .ms { font-size: clamp(40px, 8vw, 64px); font-weight: 900; font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" id="topbar"></header>
+
+    <div class="game-head">
+      <div>
+        <h1>⚡ Reaction Time</h1>
+        <p>When the red panel turns green, click as fast as you can. Lower is better.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="label">Last</div><div class="value" id="last">—</div></div>
+      <div class="stat-pill"><div class="label">Session avg</div><div class="value" id="avg">—</div></div>
+      <div class="stat-pill"><div class="label">Attempts</div><div class="value" id="tries">0</div></div>
+      <div class="stat-pill"><div class="label">Best</div><div class="value good" id="best">—</div></div>
+    </div>
+
+    <div class="board" style="padding:0;border:none;background:none;box-shadow:none">
+      <div class="rt-zone idle" id="zone">
+        <div>
+          <div class="big-emoji">⚡</div>
+          <div class="head">Reaction Time Test</div>
+          <div class="small">Click anywhere here to begin.</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="leaderboard">
+      <h2>🏆 Leaderboard — fastest reactions</h2>
+      <div class="lb-list" id="lb"></div>
+    </section>
+  </div>
+
+  <script type="module" src="/js/reaction-time.js"></script>
+</body>
+</html>

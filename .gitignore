@@ -1,0 +1,11 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# App data
+app/scores.db
+
+# Tooling
+.playwright-mcp/
+*.png

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Match — Mental Games</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>" />
+  <style>
+    .mm-grid { display: grid; gap: 12px; width: 100%; max-width: 460px; }
+    .mm-card { aspect-ratio: 1; perspective: 900px; cursor: pointer; }
+    .mm-card.locked { cursor: default; }
+    .mm-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.4s; transform-style: preserve-3d;
+    }
+    .mm-card.flipped .mm-inner, .mm-card.matched .mm-inner { transform: rotateY(180deg); }
+    .mm-face {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      border-radius: 14px; backface-visibility: hidden;
+      font-size: clamp(26px, 7vw, 42px); user-select: none;
+    }
+    .mm-cover {
+      background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
+    }
+    .mm-card:hover .mm-cover { border-color: var(--primary); }
+    .mm-symbol {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      transform: rotateY(180deg);
+    }
+    .mm-card.matched .mm-symbol {
+      background: linear-gradient(135deg, var(--good), #10b981);
+      box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.5) inset;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" id="topbar"></header>
+
+    <div class="game-head">
+      <div>
+        <h1>🃏 Memory Match</h1>
+        <p>Flip the cards and find every matching pair in as little time as possible.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="label">Time</div><div class="value" id="time">0.00s</div></div>
+      <div class="stat-pill"><div class="label">Moves</div><div class="value" id="moves">0</div></div>
+      <div class="stat-pill"><div class="label">Pairs</div><div class="value" id="pairs">0 / 8</div></div>
+      <div class="stat-pill"><div class="label">Best time</div><div class="value good" id="best">—</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="restart">↻ New game</button>
+      <span class="hint" id="status">Click any card to begin.</span>
+    </div>
+
+    <div class="board"><div class="mm-grid" id="grid"></div></div>
+
+    <section class="leaderboard">
+      <h2>🏆 Leaderboard — fastest clears</h2>
+      <div class="lb-list" id="lb"></div>
+    </section>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="big">🎉</div>
+      <h2>Board cleared!</h2>
+      <div class="result" id="result">0.00s</div>
+      <p id="sub">Nice memory.</p>
+      <div class="badge-new" id="badge" style="display:none">⭐ New personal best!</div>
+      <div><button class="btn" id="again">Play again</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/memory-match.js"></script>
+</body>
+</html>

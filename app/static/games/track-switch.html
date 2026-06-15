@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Switch — Mental Games</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚆</text></svg>" />
+  <style>
+    .ts-stage {
+      position: relative; width: 100%; max-width: 760px;
+    }
+    #canvas {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #0e1424, #0a0f1c);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      touch-action: manipulation;
+    }
+    .ts-switch-btns { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+    .ts-switch-btns .btn { min-width: 150px; }
+    .lives { letter-spacing: 3px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" id="topbar"></header>
+
+    <div class="game-head">
+      <div>
+        <h1>🚆 Track Switch</h1>
+        <p>Each train must reach the platform of its own colour. Flip the switch in time — and faster every round.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="label">Routed</div><div class="value" id="score">0</div></div>
+      <div class="stat-pill"><div class="label">Lives</div><div class="value lives" id="lives">❤❤❤</div></div>
+      <div class="stat-pill"><div class="label">Speed</div><div class="value" id="speed">1.0×</div></div>
+      <div class="stat-pill"><div class="label">Best routed</div><div class="value good" id="best">—</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="start">▶ Start</button>
+      <span class="hint" id="status">Click the stage, press ▲ / ▼, or use the buttons to set the switch.</span>
+    </div>
+
+    <div class="board" style="padding:0;border:none;background:none;box-shadow:none">
+      <div class="ts-stage">
+        <canvas id="canvas" width="760" height="440"></canvas>
+      </div>
+    </div>
+
+    <div class="ts-switch-btns">
+      <button class="btn ghost" id="btn-up">▲ Top track</button>
+      <button class="btn ghost" id="btn-down">▼ Bottom track</button>
+    </div>
+
+    <section class="leaderboard">
+      <h2>🏆 Leaderboard — most trains routed</h2>
+      <div class="lb-list" id="lb"></div>
+    </section>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="big">🚆</div>
+      <h2>Out of lives</h2>
+      <div class="result" id="result">0 routed</div>
+      <p id="sub">How fast can you decide?</p>
+      <div class="badge-new" id="badge" style="display:none">⭐ New personal best!</div>
+      <div><button class="btn" id="again">Play again</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/track-switch.js"></script>
+</body>
+</html>
